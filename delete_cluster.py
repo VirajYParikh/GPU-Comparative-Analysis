@@ -14,8 +14,15 @@ def main():
     print(f"Deleting {args.cluster} - this can take five minutes or more...")
     cmd = f"gcloud beta container --project csci-ga-3003-085-fall23-9f6d clusters delete {args.cluster} --quiet --zone us-central1"
     cp = subprocess.run(shlex.split(cmd), check=True, capture_output=True)
-    print(f"STDOUT: {cp.stdout}")
-    print(f"STDERR: {cp.stderr}")
+
+    split_out = cp.stdout.decode().split("\n")
+    split_err = cp.stderr.decode().split("\n")
+
+    for line in split_out:
+        print(line)
+
+    for line in split_err:
+        print(line)
 
 
 if __name__ == "__main__":

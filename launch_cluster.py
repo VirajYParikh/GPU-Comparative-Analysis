@@ -1,16 +1,15 @@
 import argparse
-
+import random
 import subprocess
 
 
 VALID_ACCELERATORS = [
-    "nvidia-tesla-t4",
-    "nvidia-l4",
     "nvidia-a100-80gb",
-    "a2-ultragpu-1g",
+    "nvidia-tesla-a100",
+    "nvidia-l4",
     "nvidia-tesla-t4",
-    "nvidia-tesla-v100",
     "nvidia-tesla-p4",
+    "nvidia-tesla-v100",
     "nvidia-tesla-p100",
     "nvidia-tesla-k80",
 ]
@@ -33,13 +32,18 @@ def main():
     a_type = args.accelerator_type
     cluster_name = f"gke-gpu-{a_type}-1-cluster"
 
+    sub = random.randint(0, 63) * 4
+
     machine_type: str
 
     if a_type == "nvidia-l4":
         machine_type = "g2-standard-4"
 
-    if a_type in ["nvidia-a100-80gb", "a2-ultragpu-1g"]:
+    if a_type == "nvidia-a100-80gb":
         machine_type = "a2-ultragpu-1g"
+
+    if a_type == "nnvidia-tesla-a100":
+        machine_type = "a2-highgpu-1g"
 
     if a_type in [
         "nvidia-tesla-t4",
@@ -87,7 +91,7 @@ def main():
         "--monitoring=SYSTEM",
         "--enable-private-nodes",
         "--master-ipv4-cidr",
-        "172.24.0.0/28",
+        f"172.{sub}.0.0/28",
         "--enable-ip-alias",
         "--network",
         "projects/csci-ga-3003-085-fall23-9f6d/global/networks/csci-ga-3003-085-fall23-net",
@@ -121,8 +125,14 @@ def main():
     )
     cp = subprocess.run(cli_args, check=True, capture_output=True)
 
-    print(f"STDOUT: {cp.stdout}")
-    print(f"STDERR: {cp.stderr}")
+    split_out = cp.stdout.decode().split("\n")
+    split_err = cp.stderr.decode().split("\n")
+
+    for line in split_out:
+        print(line)
+
+    for line in split_err:
+        print(line)
 
 
 if __name__ == "__main__":
