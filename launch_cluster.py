@@ -42,7 +42,7 @@ def main():
     if a_type == "nvidia-a100-80gb":
         machine_type = "a2-ultragpu-1g"
 
-    if a_type == "nnvidia-tesla-a100":
+    if a_type == "nvidia-tesla-a100":
         machine_type = "a2-highgpu-1g"
 
     if a_type in [

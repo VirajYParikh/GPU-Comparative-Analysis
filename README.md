@@ -3,7 +3,7 @@
 ## Creating a cluster
 
 ```bash
-$ python3 launch_cluster.py --accelerator_type nvidia-l4         
+$ python3 launch_cluster.py --accelerator_type nvidia-l4
 Attempting to launch gke-gpu-nvidia-l4-1-cluster - this can take five minutes or more...
 NAME                         LOCATION     MASTER_VERSION  MASTER_IP       MACHINE_TYPE   NODE_VERSION    NUM_NODES  STATUS
 gke-gpu-nvidia-l4-1-cluster  us-central1  1.27.3-gke.100  104.155.162.86  g2-standard-4  1.27.3-gke.100  3          RUNNING
@@ -18,3 +18,12 @@ kubeconfig entry generated for gke-gpu-nvidia-l4-1-cluster.
 ```
 
 ## Deleting a cluster
+
+```bash
+python3 delete_cluster.py --cluster gke-gpu-nvidia-l4-1-cluster
+Deleting gke-gpu-nvidia-l4-1-cluster - this can take five minutes or more...
+
+Deleting cluster gke-gpu-nvidia-l4-1-cluster...
+......................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................done.
+Deleted [https://container.googleapis.com/v1beta1/projects/csci-ga-3003-085-fall23-9f6d/zones/us-central1/clusters/gke-gpu-nvidia-l4-1-cluster].
+```
