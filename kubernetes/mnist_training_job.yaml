@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mnist-training-job
+spec:
+  template:
+    metadata:
+      name: mnist-training-job
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-k80
+      containers:
+        - name: mnist-training
+          image: cslecrone/hw4-training:latest
+          command: ["/usr/local/bin/python3", "/app/main.py"]
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "2"
+              memory: 4096Mi
+            requests:
+              cpu: "2"
+              memory: 4096Mi
+
+      restartPolicy: Never
