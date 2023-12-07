@@ -20,7 +20,7 @@ kubeconfig entry generated for gke-gpu-nvidia-l4-1-cluster.
 ## Deleting a cluster
 
 ```bash
-python3 delete_cluster.py --cluster gke-gpu-nvidia-l4-1-cluster
+$ python3 delete_cluster.py --cluster gke-gpu-nvidia-l4-1-cluster
 Deleting gke-gpu-nvidia-l4-1-cluster - this can take five minutes or more...
 
 Deleting cluster gke-gpu-nvidia-l4-1-cluster...
