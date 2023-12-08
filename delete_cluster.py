@@ -5,7 +5,9 @@ import subprocess
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--cluster", type=str, help="The name of the cluster to delete")
+    parser.add_argument(
+        "--cluster", type=str, help="The name of the cluster to delete", required=True
+    )
     return parser.parse_args()
 
 

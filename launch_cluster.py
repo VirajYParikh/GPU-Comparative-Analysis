@@ -124,7 +124,7 @@ def main():
     machine_type: str
 
     if a_type == "nvidia-l4":
-        machine_type = "g2-standard-4"
+        machine_type = "g2-standard-12"
 
     if a_type == "nvidia-a100-80gb":
         machine_type = "a2-ultragpu-1g"
@@ -139,7 +139,7 @@ def main():
         "nvidia-tesla-p100",
         "nvidia-tesla-k80",
     ]:
-        machine_type = "n1-standard-4"
+        machine_type = "n1-highmem-8"
 
     if a_type not in VALID_ACCELERATORS:
         raise Exception(f"{a_type} is not a valid accelerator type")

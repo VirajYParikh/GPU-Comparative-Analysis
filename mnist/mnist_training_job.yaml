@@ -16,10 +16,10 @@ spec:
           resources:
             limits:
               nvidia.com/gpu: "1"
-              cpu: "2"
-              memory: 4096Mi
+              cpu: "6"
+              memory: 16Gi
             requests:
-              cpu: "2"
-              memory: 4096Mi
+              cpu: "6"
+              memory: 16Gi
 
       restartPolicy: Never
