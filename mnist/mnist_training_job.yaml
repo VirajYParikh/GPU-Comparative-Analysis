@@ -8,10 +8,10 @@ spec:
       name: mnist-training-job
     spec:
       nodeSelector:
-        cloud.google.com/gke-accelerator: nvidia-tesla-k80
+        cloud.google.com/gke-accelerator: nvidia-tesla-t4
       containers:
         - name: mnist-training
-          image: cslecrone/hw4-training:latest
+          image: cslecrone/final-project-mnist:v1
           command: ["/usr/local/bin/python3", "/app/main.py"]
           resources:
             limits:

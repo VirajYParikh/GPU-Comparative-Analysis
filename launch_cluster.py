@@ -15,48 +15,24 @@ VALID_ACCELERATORS = [
 ]
 
 
-def _parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--accelerator_type",
-        type=str,
-        required=True,
-        help=f"Choose from {VALID_ACCELERATORS}",
-    )
-    return parser.parse_args()
+def _run_command(cmd: list[str]):
+    try:
+        cp = subprocess.run(cmd, check=True, capture_output=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e.output}")
+        raise e
+
+    split_out = cp.stdout.decode().split("\n")
+    split_err = cp.stderr.decode().split("\n")
+
+    for line in split_out:
+        print(line)
+
+    for line in split_err:
+        print(line)
 
 
-def main():
-    args = _parse_args()
-
-    a_type = args.accelerator_type
-    cluster_name = f"gke-gpu-{a_type}-1-cluster"
-
-    sub = random.randint(0, 63) * 4
-
-    machine_type: str
-
-    if a_type == "nvidia-l4":
-        machine_type = "g2-standard-4"
-
-    if a_type == "nvidia-a100-80gb":
-        machine_type = "a2-ultragpu-1g"
-
-    if a_type == "nvidia-tesla-a100":
-        machine_type = "a2-highgpu-1g"
-
-    if a_type in [
-        "nvidia-tesla-t4",
-        "nvidia-tesla-v100",
-        "nvidia-tesla-p4",
-        "nvidia-tesla-p100",
-        "nvidia-tesla-k80",
-    ]:
-        machine_type = "n1-standard-4"
-
-    if a_type not in VALID_ACCELERATORS:
-        raise Exception(f"{a_type} is not a valid accelerator type")
-
+def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str):
     cli_args = [
         "gcloud",
         "beta",
@@ -123,16 +99,52 @@ def main():
     print(
         f"Attempting to launch {cluster_name} - this can take five minutes or more..."
     )
-    cp = subprocess.run(cli_args, check=True, capture_output=True)
+    _run_command(cli_args)
 
-    split_out = cp.stdout.decode().split("\n")
-    split_err = cp.stderr.decode().split("\n")
 
-    for line in split_out:
-        print(line)
+def _parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--accelerator_type",
+        type=str,
+        required=True,
+        help=f"Choose from {VALID_ACCELERATORS}",
+    )
+    return parser.parse_args()
 
-    for line in split_err:
-        print(line)
+
+def main():
+    args = _parse_args()
+
+    a_type = args.accelerator_type
+    cluster_name = f"gke-gpu-{a_type}-1-cluster"
+
+    sub = random.randint(0, 63) * 4
+
+    machine_type: str
+
+    if a_type == "nvidia-l4":
+        machine_type = "g2-standard-4"
+
+    if a_type == "nvidia-a100-80gb":
+        machine_type = "a2-ultragpu-1g"
+
+    if a_type == "nvidia-tesla-a100":
+        machine_type = "a2-highgpu-1g"
+
+    if a_type in [
+        "nvidia-tesla-t4",
+        "nvidia-tesla-v100",
+        "nvidia-tesla-p4",
+        "nvidia-tesla-p100",
+        "nvidia-tesla-k80",
+    ]:
+        machine_type = "n1-standard-4"
+
+    if a_type not in VALID_ACCELERATORS:
+        raise Exception(f"{a_type} is not a valid accelerator type")
+
+    _launch_cluster(cluster_name, machine_type, a_type, sub)
 
 
 if __name__ == "__main__":
