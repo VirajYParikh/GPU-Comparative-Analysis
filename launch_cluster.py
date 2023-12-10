@@ -1,6 +1,7 @@
 import argparse
 import random
 import subprocess
+from typing import List
 
 
 VALID_ACCELERATORS = [
@@ -15,7 +16,7 @@ VALID_ACCELERATORS = [
 ]
 
 
-def _run_command(cmd: list[str]):
+def _run_command(cmd: List[str]):
     try:
         cp = subprocess.run(cmd, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
