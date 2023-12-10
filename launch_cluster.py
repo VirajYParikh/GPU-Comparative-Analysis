@@ -1,35 +1,16 @@
 import argparse
 import random
-import subprocess
 
-
-VALID_ACCELERATORS = [
-    "nvidia-a100-80gb",
-    "nvidia-tesla-a100",
-    "nvidia-l4",
-    "nvidia-tesla-t4",
-    "nvidia-tesla-p4",
-    "nvidia-tesla-v100",
-    "nvidia-tesla-p100",
-    "nvidia-tesla-k80",
-]
-
-
-def _run_command(cmd: list[str]):
-    try:
-        cp = subprocess.run(cmd, check=True, capture_output=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error: {e.output}")
-        raise e
-
-    split_out = cp.stdout.decode().split("\n")
-    split_err = cp.stderr.decode().split("\n")
-
-    for line in split_out:
-        print(line)
-
-    for line in split_err:
-        print(line)
+from common import run_command
+from constants import (
+    VALID_ACCELERATORS,
+    PROJECT,
+    ZONE,
+    NETWORK,
+    SUBNETWORK,
+    REGION,
+    SCOPES,
+)
 
 
 def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str):
@@ -38,7 +19,7 @@ def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str)
         "beta",
         "container",
         "--project",
-        "csci-ga-3003-085-fall23-9f6d",
+        PROJECT,
         "clusters",
         "create",
         cluster_name,
@@ -60,7 +41,7 @@ def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str)
         "--metadata",
         "disable-legacy-endpoints=true",
         "--scopes",
-        "https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append",
+        SCOPES,
         "--num-nodes",
         "1",
         "--logging=SYSTEM,WORKLOAD",
@@ -70,9 +51,9 @@ def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str)
         f"172.{sub}.0.0/28",
         "--enable-ip-alias",
         "--network",
-        "projects/csci-ga-3003-085-fall23-9f6d/global/networks/csci-ga-3003-085-fall23-net",
+        NETWORK,
         "--subnetwork",
-        "projects/csci-ga-3003-085-fall23-9f6d/regions/us-central1/subnetworks/csci-ga-3003-085-fall23-subnet-02",
+        SUBNETWORK,
         "--no-enable-intra-node-visibility",
         "--default-max-pods-per-node",
         "110",
@@ -91,15 +72,15 @@ def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str)
         "--enable-managed-prometheus",
         "--enable-shielded-nodes",
         "--node-locations",
-        "us-central1-c",
+        REGION,
         "--zone",
-        "us-central1",
+        ZONE,
     ]
 
     print(
         f"Attempting to launch {cluster_name} - this can take five minutes or more..."
     )
-    _run_command(cli_args)
+    run_command(cli_args)
 
 
 def _parse_args() -> argparse.Namespace:
