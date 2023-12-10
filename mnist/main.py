@@ -196,8 +196,7 @@ def main():
     with profile(
         activities=activities,
         record_shapes=False,
-        profile_memory=True,
-        use_cuda=torch.cuda.is_available(),
+        profile_memory=False,
     ) as prof:
         model = Net().to(device)
         optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
@@ -209,7 +208,7 @@ def main():
             scheduler.step()
     print(
         prof.key_averages(group_by_input_shape=True).table(
-            sort_by=sort_by, row_limit=25
+            sort_by=sort_by, row_limit=10
         )
     )
 

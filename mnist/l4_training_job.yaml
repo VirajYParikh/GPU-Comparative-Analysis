@@ -1,18 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: mnist-training-job
+  name: l4-training-job
 spec:
   template:
     metadata:
-      name: mnist-training-job
+      name: l4-training-job
     spec:
       nodeSelector:
         cloud.google.com/gke-accelerator: nvidia-l4
       containers:
         - name: mnist-training
-          image: cslecrone/final-project-mnist:v9
-          command: ["sleep", "1000"]
+          image: cslecrone/final-project-mnist:cuda-12-v1
+          command: ["python3", "main.py"]
           resources:
             limits:
               nvidia.com/gpu: "1"
