@@ -11,7 +11,7 @@ spec:
         cloud.google.com/gke-accelerator: nvidia-l4
       containers:
         - name: gcn-training
-          image: cslecrone/final-project-gcn:cuda-12-v1
+          image: virajparikh199725/final-project-gcn:latest
           command: ["python3", "main.py"]
           resources:
             limits:
