@@ -2,6 +2,7 @@ import argparse
 import random
 import subprocess
 from typing import List
+from constants import *
 
 
 VALID_ACCELERATORS = [
