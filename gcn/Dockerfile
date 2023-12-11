@@ -14,4 +14,4 @@ WORKDIR /app
 
 COPY ./main.py .
 
-RUN pip3 install --no-cache-dir torch==1.12.1 torchvision==0.13.1 pandas numpy requests
+RUN pip3 install --no-cache-dir torch torchvision pandas numpy requests

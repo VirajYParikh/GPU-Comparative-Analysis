@@ -11,7 +11,7 @@ spec:
         cloud.google.com/gke-accelerator: nvidia-tesla-k80
       containers:
         - name: gcn-training
-          image: virajparikh199725/final-project-gcn:latest-v3
+          image: virajparikh199725/final-project-gcn:latest-v4
           command: ["python3", "main.py"]
           resources:
             limits:
