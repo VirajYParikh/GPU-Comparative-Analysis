@@ -9,7 +9,7 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from torch.optim import Adam
-from torch.optim.lr_secheduler import StepLR
+# from torch.optim.lr_secheduler import StepLR
 from torch.profiler import profile, record_function, ProfilerActivity
 
 

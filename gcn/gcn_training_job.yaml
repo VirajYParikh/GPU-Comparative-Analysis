@@ -1,11 +1,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: a100-gcn-training-job
+  name: a100-gcn-training-job-v2
 spec:
   template:
     metadata:
-      name: a100-gcn-training-job
+      name: a100-gcn-training-job-v2
     spec:
       nodeSelector:
         cloud.google.com/gke-accelerator: nvidia-tesla-a100
