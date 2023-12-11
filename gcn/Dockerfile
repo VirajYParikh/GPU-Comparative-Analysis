@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.0.0-base-ubuntu20.04
+FROM nvidia/cuda:11.4.3-base-ubuntu20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -14,4 +14,4 @@ WORKDIR /app
 
 COPY ./main.py .
 
-RUN pip3 install torch==2.1.0 torchvision==0.16.0 pandas numpy requests
+RUN pip3 install --no-cache-dir torch==1.12.1 torchvision==0.13.1 pandas numpy requests
