@@ -9,6 +9,8 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 from torch.optim import Adam
+from torch.optim.lr_secheduler import StepLR
+from torch.profiler import profile, record_function, ProfilerActivity
 
 
 class GraphConv(nn.Module):
@@ -253,10 +255,24 @@ if __name__ == '__main__':
     optimizer = Adam(gcn.parameters(), lr=args.lr, weight_decay=args.l2)
     criterion = nn.NLLLoss()
 
-    for epoch in range(args.epochs):
-        train_iter(epoch + 1, gcn, optimizer, criterion, (features, adj_mat), labels, idx_train, idx_val, args.val_every)
-        if args.dry_run:
-            break
+    activities = [ProfilerActivity.CPU]
+
+    if torch.cuda.is_available():
+        activities.append(ProfilerActivity.CUDA)
+
+    with profile(activities=activities, record_shapes=True, profile_memory=True) as prof:
+        for epoch in range(args.epochs):
+            train_iter(epoch + 1, gcn, optimizer, criterion, (features, adj_mat), labels, idx_train, idx_val, args.val_every)
+            if args.dry_run:
+                break
+
+    # Print profiling results
+    print(prof.key_averages(group_by_input_shape=True).table(sort_by="self_cpu_time_total", row_limit=10))
+
+    # for epoch in range(args.epochs):
+    #     train_iter(epoch + 1, gcn, optimizer, criterion, (features, adj_mat), labels, idx_train, idx_val, args.val_every)
+    #     if args.dry_run:
+    #         break
 
     loss_test, acc_test = test(gcn, criterion, (features, adj_mat), labels, idx_test)
     print(f'Test set results: loss {loss_test:.4f} accuracy {acc_test:.4f}')
