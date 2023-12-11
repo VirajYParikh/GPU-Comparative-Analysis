@@ -1,17 +1,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: a100-gcn-training-job-v2
+  name: a100-gcn-training-job-v2-mod
 spec:
   template:
     metadata:
-      name: a100-gcn-training-job-v2
+      name: a100-gcn-training-job-v2-mod
     spec:
       nodeSelector:
         cloud.google.com/gke-accelerator: nvidia-tesla-a100
       containers:
         - name: gcn-training
-          image: virajparikh199725/final-project-gcn:latest
+          image: virajparikh199725/final-project-gcn:latest-v2
           command: ["python3", "main.py"]
           resources:
             limits:
