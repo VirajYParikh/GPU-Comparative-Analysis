@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cifar10-training-job
+spec:
+  template:
+    metadata:
+      name: cifar10-training-job
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-k80
+      containers:
+        - name: cifar10-training
+          image: stanleyjovel/final-project-cifar10:v4
+          command: ["sleep", "1000"]
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 64Gi
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 32Gi
+
+      restartPolicy: Never
