@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: v100-mnist-training-job
+spec:
+  template:
+    metadata:
+      name: v100-mnist-training-job
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-v100
+      containers:
+        - name: v100-mnist-training-job
+          image: cslecrone/final-project-mnist:v9
+          command: ["python3", "main.py"]
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 64Gi
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 32Gi
+
+      restartPolicy: Never

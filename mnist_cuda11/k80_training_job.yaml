@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k80-mnist-training-job
+spec:
+  template:
+    metadata:
+      name: k80-mnist-training-job
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-k80
+      containers:
+        - name: k80-mnist-training-job
+          image: virajparikh199725/final-project-gcn:latest-v3
+          command: ["sleep", "100000"]
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 64Gi
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 32Gi
+
+      restartPolicy: Never

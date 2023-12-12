@@ -1,0 +1,26 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: l4-training-job
+spec:
+  template:
+    metadata:
+      name: l4-training-job
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-accelerator: nvidia-tesla-a100
+      containers:
+        - name: mnist-training
+          image: cslecrone/final-project-mnist:cuda-12-v1
+          command: ["python3", "main.py"]
+          resources:
+            limits:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 64Gi
+            requests:
+              nvidia.com/gpu: "1"
+              cpu: "6"
+              memory: 32Gi
+
+      restartPolicy: Never
