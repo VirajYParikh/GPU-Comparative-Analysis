@@ -2,6 +2,7 @@ import argparse
 import random
 import subprocess
 from typing import List
+from constants import *
 
 
 VALID_ACCELERATORS = [
@@ -100,7 +101,7 @@ def _launch_cluster(cluster_name: str, machine_type: str, a_type: str, sub: str)
     print(
         f"Attempting to launch {cluster_name} - this can take five minutes or more..."
     )
-    run_command(cli_args)
+    _run_command(cli_args)
 
 
 def _parse_args() -> argparse.Namespace:
