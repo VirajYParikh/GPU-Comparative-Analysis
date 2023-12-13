@@ -1,6 +1,7 @@
 from __future__ import print_function
 import argparse
 import os
+import sys
 
 import torch
 import torch.nn as nn
@@ -9,6 +10,8 @@ import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from torch.profiler import profile, record_function, ProfilerActivity
+
+from torchinfo import summary
 
 
 class Net(nn.Module):
@@ -157,6 +160,12 @@ def main():
         default=False,
         help="For Saving the current Model",
     )
+    parser.add_argument(
+        "--info-only",
+        action="store_true",
+        default=False,
+        help="Just print the TorchInfo summary of the model and exit",
+    )
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
     use_mps = not args.no_mps and torch.backends.mps.is_available()
@@ -185,6 +194,11 @@ def main():
     train_loader = torch.utils.data.DataLoader(dataset1, **train_kwargs)
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
 
+    if args.info_only:
+        model = Net().to(device)
+        print(summary(model))
+        sys.exit(0)
+
     activities = [ProfilerActivity.CPU]
 
     if torch.cuda.is_available():
@@ -198,6 +212,7 @@ def main():
         profile_memory=False,
     ) as prof:
         model = Net().to(device)
+
         optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
         scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
