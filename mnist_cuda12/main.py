@@ -11,8 +11,6 @@ from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
 from torch.profiler import profile, record_function, ProfilerActivity
 
-from torchinfo import summary
-
 
 class Net(nn.Module):
     def __init__(self):
@@ -195,6 +193,10 @@ def main():
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
 
     if args.info_only:
+        # NOTE: This flag line is for interactive use only - the Docker
+        # image does not include torchinfo
+        from torchinfo import summary
+
         model = Net().to(device)
         print(summary(model))
         sys.exit(0)
