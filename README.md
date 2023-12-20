@@ -19,6 +19,20 @@ Install the package:
 brew install --cask google-cloud-sdk
 ```
 
+Once gcloud is installed,  we need to login to our instance using:
+```bash 
+$ gcloud auth login 
+```
+After which we need to setup the default region and project id to connect with.
+
+This step involved various substeps and configurations to be considered while creating the cluster. 
+1. Selecting the correct accelerator
+2. Configuring the correct flags
+3. Ensuring the region and the project we are connecting to is correct
+4. Since we were planning on repeating this task multiple times we decided to write a script which allowed us to spin up a cluster on the project and region of choice by simply passing the accelerator type in the argument of the command. 
+
+
+
 
 
 ### Creating a cluster
