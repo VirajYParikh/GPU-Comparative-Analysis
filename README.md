@@ -1,6 +1,17 @@
 # Comparative Performance of NVIDIA Accelerators on GKE
 
-## Creating a cluster
+## Introduction:
+Today, deep learning models are rapidly advancing and being used for multiple applications throughout the world. These deep learning models are trained all large datasets and have extremely complex configurations and computations owing to the number of parameters they require which are in the order of 10’s and 20’s. A simple computer with average computing power cannot handle such loads. GPU’s therefore become very important to run these models. However, GPUs are expensive and utilize a lot of energy. Not all companies can afford buying GPU’s. Bigger companies therefore make use of Cloud to provide GPU services to these companies. 
+
+Different GPU’s have different computing powers, and have varying load capacity and therefore pricing structure. Therefore it becomes very important to understand the exact requirements of the application and choose the right GPU. This can not only help save money but also realize lower computation times and memory utilization.
+
+## Project Idea and objective:
+Our project revolved around the analysis of the performance of various NVIDIA accelerators available on GKE over different models and jobs. This comparative analysis would help us understand which accelerators are performing better over the others and whether we can observe any outlying results. We will be conducting all these tests on Google’s Cloud Console making use of the accelerators they have available for us to use.
+
+
+
+
+### Creating a cluster
 
 ```bash
 # Replace nvidia-l4 with the accelerator you want to use
@@ -17,7 +28,7 @@ To inspect the contents of your cluster, go to: https://console.cloud.google.com
 kubeconfig entry generated for gke-gpu-nvidia-l4-1-cluster.
 ```
 
-## Deleting a cluster
+### Deleting a cluster
 
 ```bash
 # Replace gke-gpu-nvidia-tesla-k80-1-cluster with the name of the cluster you want to delete
@@ -28,7 +39,7 @@ Deleting cluster gke-gpu-nvidia-l4-1-cluster.........done.
 Deleted [https://container.googleapis.com/v1beta1/projects/csci-ga-3003-085-fall23-9f6d/zones/us-central1/clusters/gke-gpu-nvidia-l4-1-cluster].
 ```
 
-## Get credentials for a cluster
+### Get credentials for a cluster
 
 ```bash
 # Replace gke-gpu-nvidia-tesla-k80-1-cluster with the name of a newly created cluster
@@ -37,21 +48,21 @@ Fetching cluster endpoint and auth data.
 kubeconfig entry generated for gke-gpu-nvidia-tesla-k80-1-cluster.
 ```
 
-## Install NVIDIA drivers
+### Install NVIDIA drivers
 
 ```bash
 $ kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/container-engine-accelerators/master/nvidia-driver-installer/cos/daemonset-preloaded.yaml
 daemonset.apps/nvidia-driver-installer created
 ```
 
-## Launch a job
+### Launch a job
 
 ```bash
 $ kubectl apply -f kubernetes/mnist_training_job.yaml
 job.batch/mnist-training-job created
 ```
 
-## Get job status
+### Get job status
 
 ```bash
 kubectl get pods
