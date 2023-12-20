@@ -32,9 +32,6 @@ This step involved various substeps and configurations to be considered while cr
 4. Since we were planning on repeating this task multiple times we decided to write a script which allowed us to spin up a cluster on the project and region of choice by simply passing the accelerator type in the argument of the command. 
 
 
-
-
-
 ### Creating a cluster
 
 ```bash
@@ -52,6 +49,48 @@ To inspect the contents of your cluster, go to: https://console.cloud.google.com
 kubeconfig entry generated for gke-gpu-nvidia-l4-1-cluster.
 ```
 
+5. To now connect to the cluster we need to run the following command: 
+
+### Get credentials for a cluster
+
+```bash
+# Replace gke-gpu-nvidia-tesla-k80-1-cluster with the name of a newly created cluster
+$ gcloud container clusters get-credentials gke-gpu-nvidia-tesla-k80-1-cluster --region us-central1 --project csci-ga-3003-085-fall23-9f6d
+Fetching cluster endpoint and auth data.
+kubeconfig entry generated for gke-gpu-nvidia-tesla-k80-1-cluster.
+```
+
+6. Once the cluster was configured, we need to wait for its deployment on GKE, after which we need to install the drivers of the desired compatible version based on the accelerator we are running the cluster.
+
+### Install NVIDIA drivers
+
+```bash
+$ kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/container-engine-accelerators/master/nvidia-driver-installer/cos/daemonset-preloaded.yaml
+daemonset.apps/nvidia-driver-installer created
+```
+
+#### Step 2: 
+Creating the Docker Image to install packages compatible with the NVIDIA drivers, CUDA and torch packages:
+
+Before we deploy our job to the cluster we need to create a docker container where we can run the pod. The docker image was created using a VM we ran on Google Cloud Console. We installed docker on that VM and installed all the required images we needed with the necessary dependencies and pushed the image to docker hub from which the pod would be able to extract the image to run the Job.
+
+#### Step 3:
+Creating the Yaml file to deploy the job on the Cluster created on GKE:
+
+After creating the image and pushing it successfully to docker hub we wrote a Yaml file for running the job inside the cluster that was created in on GKE.
+We deployed a Job, with the name of the image that needed to be extracted from docker hub in the yaml file and hit the following command to deploy the job in GKE:
+
+
+```bash
+$ kubectl apply -f kubernetes/mnist_training_job.yaml
+job.batch/mnist-training-job created
+```
+
+Before we did this we ensured that we had Kubernetes installed on our machine by running:
+```bash 
+$ pip install kubectl
+```
+
 ### Deleting a cluster
 
 ```bash
@@ -63,21 +102,6 @@ Deleting cluster gke-gpu-nvidia-l4-1-cluster.........done.
 Deleted [https://container.googleapis.com/v1beta1/projects/csci-ga-3003-085-fall23-9f6d/zones/us-central1/clusters/gke-gpu-nvidia-l4-1-cluster].
 ```
 
-### Get credentials for a cluster
-
-```bash
-# Replace gke-gpu-nvidia-tesla-k80-1-cluster with the name of a newly created cluster
-$ gcloud container clusters get-credentials gke-gpu-nvidia-tesla-k80-1-cluster --region us-central1 --project csci-ga-3003-085-fall23-9f6d
-Fetching cluster endpoint and auth data.
-kubeconfig entry generated for gke-gpu-nvidia-tesla-k80-1-cluster.
-```
-
-### Install NVIDIA drivers
-
-```bash
-$ kubectl apply -f https://raw.githubusercontent.com/GoogleCloudPlatform/container-engine-accelerators/master/nvidia-driver-installer/cos/daemonset-preloaded.yaml
-daemonset.apps/nvidia-driver-installer created
-```
 
 ### Launch a job
 
