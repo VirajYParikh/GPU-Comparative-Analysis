@@ -80,6 +80,7 @@ Creating the Yaml file to deploy the job on the Cluster created on GKE:
 After creating the image and pushing it successfully to docker hub we wrote a Yaml file for running the job inside the cluster that was created in on GKE.
 We deployed a Job, with the name of the image that needed to be extracted from docker hub in the yaml file and hit the following command to deploy the job in GKE:
 
+### Launch a job
 
 ```bash
 $ kubectl apply -f kubernetes/mnist_training_job.yaml
@@ -89,6 +90,24 @@ job.batch/mnist-training-job created
 Before we did this we ensured that we had Kubernetes installed on our machine by running:
 ```bash 
 $ pip install kubectl
+```
+
+Once the job is deployed, a pod will be created in the cluster within which our job will run.
+You can see the status of your job and pod using the following commands:
+### Get job status
+
+```bash
+$ kubectl get pods
+```
+
+```bash
+kubectl get pods
+NAME                       READY   STATUS    RESTARTS   AGE
+mnist-training-job-gzbs7   0/1     Pending   0          20s
+```
+To see the results of the job you can run the following command:
+```bash
+$ kubectl logs `pod id`
 ```
 
 ### Deleting a cluster
@@ -103,17 +122,4 @@ Deleted [https://container.googleapis.com/v1beta1/projects/csci-ga-3003-085-fall
 ```
 
 
-### Launch a job
 
-```bash
-$ kubectl apply -f kubernetes/mnist_training_job.yaml
-job.batch/mnist-training-job created
-```
-
-### Get job status
-
-```bash
-kubectl get pods
-NAME                       READY   STATUS    RESTARTS   AGE
-mnist-training-job-gzbs7   0/1     Pending   0          20s
-```
