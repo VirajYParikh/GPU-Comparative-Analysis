@@ -12,6 +12,12 @@ Our project revolved around the analysis of the performance of various NVIDIA ac
 The implementation of this project required several steps:
 
 #### Step 1:
+Bringing up the Kubernetes cluster with the appropriate accelerator:
+Firstly to connect to GCP, we need to install the GCP CLI:
+Install the package:
+```bash
+brew install --cask google-cloud-sdk
+```
 
 
 
