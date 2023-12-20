@@ -8,6 +8,10 @@ Different GPU’s have different computing powers, and have varying load capacit
 ## Project Idea and objective:
 Our project revolved around the analysis of the performance of various NVIDIA accelerators available on GKE over different models and jobs. This comparative analysis would help us understand which accelerators are performing better over the others and whether we can observe any outlying results. We will be conducting all these tests on Google’s Cloud Console making use of the accelerators they have available for us to use.
 
+## Implementation:
+The implementation of this project required several steps:
+
+#### Step 1:
 
 
 
