@@ -114,11 +114,15 @@ $ kubectl logs `pod id`
 Before we move to the results, please take note of the following:
 1. We ran three different architectures from the pytorch examples models:
 
+<div align="center">
 <img width="708" alt="Screenshot 2023-12-20 at 9 55 03 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/14bbe19c-603f-4115-a363-a817f2c05279">
+</div>
 
 2. Following are the available accelerators on GKE on which we ran the experiments:
 
+<div align="center">
 <img width="747" alt="Screenshot 2023-12-20 at 9 55 26 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/bde76958-7502-4bbf-becc-9f8871b12e19">
+</div>
 
 3. We ran each model on all the accelerators thrice to ensure consistency in the results that we obtain while running the jobs and received the following results.
 
@@ -130,20 +134,29 @@ Before we move to the results, please take note of the following:
 <img width="793" alt="Screenshot 2023-12-20 at 10 01 25 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/3e6d3a1a-7a61-490e-87a0-36cc9c1cfb8c">
 </div>
 
+<div align="center">
 <img width="746" alt="Screenshot 2023-12-20 at 10 01 39 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/442e6d85-b169-452a-b544-71ae9c72787c">
+</div>
 
 ### GCN Example:
 
+<div align="center">
 <img width="811" alt="Screenshot 2023-12-20 at 10 19 12 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/7a3871b5-1d14-4e71-b84f-5999b31d1749">
+</div>
 
+<div align="center">
 <img width="827" alt="Screenshot 2023-12-20 at 10 19 26 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/ed9baf07-511a-4b13-9721-910a2171c5ec">
+</div>
 
 ### CIFAR-10 Example:
 
+<div align="center">
 <img width="827" alt="Screenshot 2023-12-20 at 10 20 05 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/36a9c9eb-de81-406b-888f-4da7107b90f5">
+</div>
 
+<div align="center">
 <img width="738" alt="Screenshot 2023-12-20 at 10 20 29 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/dce13ee9-092b-45ee-b1cc-ac13bb92e04a">
-
+</div>
 
 ### Deleting a cluster
 
