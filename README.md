@@ -110,6 +110,41 @@ To see the results of the job you can run the following command:
 $ kubectl logs `pod id`
 ```
 
+Before we move to the results, please take note of the following:
+1. We ran three different architectures from the pytorch examples models:
+
+Image to be added
+
+2. Following are the available accelerators on GKE on which we ran the experiments:
+
+Image to be added
+
+3. We ran each model on all the accelerators thrice to ensure consistency in the results that we obtain while running the jobs and received the following results.
+
+
+## Profiling Results:
+
+### Basic MNIST Example:
+
+#### NVIDIA Tesla T4:
+
+##### Attempt 1:
+
+Image to be added
+
+##### Attempt 2:
+
+Image to be added
+
+##### Attempt 2:
+
+Image to be 
+
+
+
+
+
+
 ### Deleting a cluster
 
 ```bash
@@ -121,5 +156,35 @@ Deleting cluster gke-gpu-nvidia-l4-1-cluster.........done.
 Deleted [https://container.googleapis.com/v1beta1/projects/csci-ga-3003-085-fall23-9f6d/zones/us-central1/clusters/gke-gpu-nvidia-l4-1-cluster].
 ```
 
+### Aggregated Results:
+We aggregated all the results that we achieved and focused mainly on the CUDA times to since our main objective was to perform a comparative analysis on the accelerator performances on different workloads. 
+
+### Inferences:
+
+1. Clearly the A100’s are dominating given their high performance specs. 
+2. There is an interesting observation: L4 accelerators are doing better than the A100’s as well. 
+3. The K80 accelerator is the least performing solution being very old and lacks sophisticated specs as the newer ones
 
 
+## Conclusion:
+We were obviously expecting the A100 to come out at the top however, we were taken by surprise with the results we got where the L4 dominated. Such experiments always help open up our minds and allow us to spread validated information among the masses to help the community.
+
+A100’s today are much more expensive than all the other accelerators and are much more popular and therefore hard to get, which is probably why the L4s were introduced, essentially to handle smaller workloads faster and at a cheaper cost. 
+
+Thus, before choosing an accelerator, one must consider all the factors we spoke about. This will allow them to use finances, energy and resources wisely.
+
+### Challenges we faced:
+1. It was really hard to initiate a cluster - there are several configurations and flags to be set to get the right cluster set for the right purpose.
+2. Different accelerators required different CUDA versions and NVIDIA driver versions installed which proved to be an obstacle being completely new to this implementation.
+3. Newer accelerators require CUDA >= 12 versions installed. 
+4. A100s are difficult to get: Requires a combination of luck and patience.
+
+
+## Links and References:
+1. Source Code: https://github.com/VirajYParikh/cloud-ml-final-project
+2. Final Presentation: https://docs.google.com/presentation/d/17JCuM_he77VJZz8E_83Ni4qT1sPqyecY64MVJDpffYU/edit#slide=id.p
+3. Calculations: https://docs.google.com/spreadsheets/d/1o9j5yhOEjILh7YE4avyjN2AcwYXpW90jDQKMmFYVnoI/edit#gid=0
+4. Models and Codes: https://github.com/pytorch/examples
+5. Kubernetes Cluster Creation: https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-zonal-cluster
+6. Job deployment: https://cloud.google.com/kubernetes-engine/docs/concepts/gpus
+7. Cluster creation: https://youtu.be/hxpGC19PzwI?feature=shared
