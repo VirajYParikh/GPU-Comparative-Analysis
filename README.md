@@ -19,6 +19,7 @@ Install the package:
 brew install --cask google-cloud-sdk
 ```
 
+
 Once gcloud is installed,  we need to login to our instance using:
 ```bash 
 $ gcloud auth login 
@@ -130,7 +131,7 @@ Before we move to the results, please take note of the following:
 
 ##### Attempt 1:
 
-
+<img width="1219" alt="Screenshot 2023-12-20 at 9 57 31 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/c6680189-0737-491b-a9c7-56344ba41764">
 
 ##### Attempt 2:
 
