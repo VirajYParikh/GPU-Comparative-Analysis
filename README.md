@@ -132,7 +132,17 @@ Before we move to the results, please take note of the following:
 
 <img width="746" alt="Screenshot 2023-12-20 at 10 01 39 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/442e6d85-b169-452a-b544-71ae9c72787c">
 
+### GCN Example:
 
+<img width="811" alt="Screenshot 2023-12-20 at 10 19 12 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/7a3871b5-1d14-4e71-b84f-5999b31d1749">
+
+<img width="827" alt="Screenshot 2023-12-20 at 10 19 26 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/ed9baf07-511a-4b13-9721-910a2171c5ec">
+
+### CIFAR-10 Example:
+
+<img width="827" alt="Screenshot 2023-12-20 at 10 20 05 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/36a9c9eb-de81-406b-888f-4da7107b90f5">
+
+<img width="738" alt="Screenshot 2023-12-20 at 10 20 29 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/dce13ee9-092b-45ee-b1cc-ac13bb92e04a">
 
 
 ### Deleting a cluster
