@@ -188,7 +188,9 @@ Now, as we know the models we consider in this project are quite simple with not
 However, if we talk about models with much higher number of parameters and much greater loads, there would certainly be a variation in the performance with the A100 dominating L4 given their 5x more bandwidth over L4. 
 
 
+
 ### Deleting a cluster
+Having the clusters running on GKE results in unnecessary consumption thus reducing the availability of resources. This is why it is important to delete clusters after using them to free up space and bandwidth. 
 
 ```bash
 # Replace gke-gpu-nvidia-tesla-k80-1-cluster with the name of the cluster you want to delete
