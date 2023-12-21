@@ -127,21 +127,10 @@ Before we move to the results, please take note of the following:
 
 ### Basic MNIST Example:
 
-#### NVIDIA Tesla T4:
-
-##### Attempt 1:
-
-<img width="1219" alt="Screenshot 2023-12-20 at 9 57 31 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/c6680189-0737-491b-a9c7-56344ba41764">
-
-##### Attempt 2:
-
-Image to be added
-
-##### Attempt 2:
-
-Image to be 
+<img width="793" alt="Screenshot 2023-12-20 at 10 01 25 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/3e6d3a1a-7a61-490e-87a0-36cc9c1cfb8c">
 
 
+<img width="746" alt="Screenshot 2023-12-20 at 10 01 39 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/442e6d85-b169-452a-b544-71ae9c72787c">
 
 
 
