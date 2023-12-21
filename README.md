@@ -126,9 +126,9 @@ Before we move to the results, please take note of the following:
 ## Profiling Results:
 
 ### Basic MNIST Example:
-
+<div align="center">
 <img width="793" alt="Screenshot 2023-12-20 at 10 01 25 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/3e6d3a1a-7a61-490e-87a0-36cc9c1cfb8c">
-
+</div>
 
 <img width="746" alt="Screenshot 2023-12-20 at 10 01 39 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/442e6d85-b169-452a-b544-71ae9c72787c">
 
