@@ -113,11 +113,11 @@ $ kubectl logs `pod id`
 Before we move to the results, please take note of the following:
 1. We ran three different architectures from the pytorch examples models:
 
-Image to be added
+<img width="708" alt="Screenshot 2023-12-20 at 9 55 03 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/14bbe19c-603f-4115-a363-a817f2c05279">
 
 2. Following are the available accelerators on GKE on which we ran the experiments:
 
-Image to be added
+<img width="747" alt="Screenshot 2023-12-20 at 9 55 26 PM" src="https://github.com/VirajYParikh/cloud-ml-final-project/assets/67093208/bde76958-7502-4bbf-becc-9f8871b12e19">
 
 3. We ran each model on all the accelerators thrice to ensure consistency in the results that we obtain while running the jobs and received the following results.
 
@@ -130,7 +130,7 @@ Image to be added
 
 ##### Attempt 1:
 
-Image to be added
+
 
 ##### Attempt 2:
 
